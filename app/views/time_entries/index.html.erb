@@ -29,6 +29,8 @@
           <% unless entry.ended_at %>
             <%= button_to "⏹️ Detener", stop_time_entry_path(entry), method: :post %>
           <% end %>
+            <%= button_to "🗑️ Eliminar", time_entry_path(entry), method: :delete, data: { confirm: "¿Seguro que querés eliminar esta actividad?" }, class: "btn-delete" %>
+
         </td>
       </tr>
     <% end %>

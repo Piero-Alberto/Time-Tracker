@@ -23,6 +23,12 @@ class TimeEntriesController < ApplicationController
      redirect_to time_entries_path, notice: "Actividad detenida."
   end
 
+  def destroy
+    @entry = TimeEntry.find(params[:id])
+    @entry.destroy
+    redirect_to time_entries_path, notice: "Actividad eliminada."
+  end
+
 private
 
   def entry_params

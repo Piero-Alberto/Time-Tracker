@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   root "time_entries#index"
 
-  resources :time_entries, only: [:index, :new, :create] do
+  resources :time_entries, only: [:index, :new, :create, :destroy] do
     member do
       post :stop
     end
