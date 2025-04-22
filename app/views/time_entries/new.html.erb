@@ -1,2 +1,27 @@
-<h1>TimeEntries#new</h1>
-<p>Find me in app/views/time_entries/new.html.erb</p>
+<h1>Iniciar Nueva Actividad</h1>
+
+
+
+<%= form_with model: @entry, local: true, data: { turbo: false } do |form| %>
+  <div class="form-group">
+    <%= form.label :activity, "¿Qué estás haciendo?" %><br>
+    <%= form.text_field :activity, class: "form-control" %>
+  </div>
+
+  <div>
+    <%= form.submit "Iniciar", class: "btn" %>
+  </div>
+<% end %>
+
+<% if @entry.errors.any? %>
+  <div class="error-messages">
+    <h3>⚠️ Hubo errores:</h3>
+    <ul>
+      <% @entry.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
+
+<%= link_to "⬅️ Volver al historial", time_entries_path %>

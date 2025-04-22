@@ -1,2 +1,37 @@
-<h1>TimeEntries#index</h1>
-<p>Find me in app/views/time_entries/index.html.erb</p>
+<h1>Historial de Actividades</h1>
+
+<%= link_to "➕ Nueva actividad", new_time_entry_path, class: "btn" %>
+
+<table>
+    <thead>
+    <tr>
+      <th>Actividad</th>
+      <th>Inicio</th>
+      <th>Fin</th>
+      <th>Duración</th>
+      <th>Acciones</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @entries.each do |entry| %>
+      <tr>
+        <td><%= entry.activity %></td>
+        <td><%= entry.started_at.strftime("%H:%M:%S") if entry.started_at %></td>
+        <td><%= entry.ended_at.strftime("%H:%M:%S") if entry.ended_at %></td>
+        <td>
+          <% if entry.ended_at %>
+            <%= distance_of_time_in_words(entry.started_at, entry.ended_at) %>
+          <% else %>
+            En progreso...
+          <% end %>
+        </td>
+        <td>
+          <% unless entry.ended_at %>
+            <%= button_to "⏹️ Detener", stop_time_entry_path(entry), method: :post %>
+          <% end %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+
+</table>
